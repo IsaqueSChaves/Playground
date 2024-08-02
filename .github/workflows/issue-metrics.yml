@@ -21,7 +21,7 @@ jobs:
       - name: Set up the dates for the last week
         id: set-dates
         run: |
-          end_date=$(date -I -d "today")
+          end_date=$(date -I -d "yesterday")
           start_date=$(date -I -d "$end_date - 6 days")
           echo "start_date=$start_date" >> $GITHUB_ENV
           echo "end_date=$end_date" >> $GITHUB_ENV
@@ -29,25 +29,25 @@ jobs:
       - name: Run issue-metrics tool for PRs opened in the last week
         uses: github/issue-metrics@v3
         env:
-          GH_TOKEN: ${{ secrets.PRS_REPORTER_GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: "repo:IsaqueSChaves/Playground is:pr created:${{ env.start_date }}..${{ env.end_date }}"
 
       - name: Create issue for opened PRs
         uses: peter-evans/create-issue-from-file@v4
         with:
           title: Weekly pull request metrics report for opened PRs
-          token: ${{ secrets.PRS_REPORTER_GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           content-filepath: ./issue_metrics.md
 
       - name: Run issue-metrics tool for PRs closed in the last week
         uses: github/issue-metrics@v3
         env:
-          GH_TOKEN: ${{ secrets.PRS_REPORTER_GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: "repo:IsaqueSChaves/Playground is:pr closed:${{ env.start_date }}..${{ env.end_date }}"
 
       - name: Create issue for closed PRs
         uses: peter-evans/create-issue-from-file@v4
         with:
           title: Weekly pull request metrics report for closed PRs
-          token: ${{ secrets.PRS_REPORTER_GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           content-filepath: ./issue_metrics.md
