@@ -21,7 +21,7 @@ jobs:
       - name: Set up the dates for the last week
         id: set-dates
         run: |
-          end_date=$(date -I -d "yesterday")
+          end_date=$(date -I -d "today")
           start_date=$(date -I -d "$end_date - 6 days")
           echo "start_date=$start_date" >> $GITHUB_ENV
           echo "end_date=$end_date" >> $GITHUB_ENV
