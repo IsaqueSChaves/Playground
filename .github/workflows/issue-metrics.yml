@@ -30,7 +30,7 @@ jobs:
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.PRS_REPORTER_GH_TOKEN }}
-          SEARCH_QUERY: "repo:owner/repo is:pr created:${{ env.start_date }}..${{ env.end_date }} -reason:\"not planned\""
+          SEARCH_QUERY: "repo:IsaqueSChaves/Playground is:pr created:${{ env.start_date }}..${{ env.end_date }} -reason:\"not planned\""
 
       - name: Create issue for opened PRs
         uses: peter-evans/create-issue-from-file@v4
@@ -43,7 +43,7 @@ jobs:
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.PRS_REPORTER_GH_TOKEN }}
-          SEARCH_QUERY: "repo:owner/repo is:pr closed:${{ env.start_date }}..${{ env.end_date }} -reason:\"not planned\""
+          SEARCH_QUERY: "repo:IsaqueSChaves/Playground is:pr closed:${{ env.start_date }}..${{ env.end_date }} -reason:\"not planned\""
 
       - name: Create issue for closed PRs
         uses: peter-evans/create-issue-from-file@v4
